@@ -30,6 +30,10 @@ const gameSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    image: {
+        type: String,
+        default: '/images/default-game.jpg'
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
