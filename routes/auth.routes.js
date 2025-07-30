@@ -137,7 +137,7 @@ router.post('/change-password', isLoggedIn, async (req, res) => {
 
         await user.save();
 
-        res.render('auth/change-password', {error: 'An error occurred while changing the password.'});
+        res.redirect('/users/profile');
     } catch (error) {
         console.error('Error changing password: ', error);
         res.render('auth/change-password', {error: 'An error occurred while changing the password'});

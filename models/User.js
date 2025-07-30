@@ -19,6 +19,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    name: {
+        type: String
+    },
+    age: {
+        type: Number, min: 6
+    },
+    bio: {
+        type: String
+    },
+    avatar: {
+        type: String
+    },
     games: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Game'

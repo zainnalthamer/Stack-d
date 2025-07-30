@@ -11,6 +11,11 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 // importing bcrypt
 const bcrypt = require('bcrypt');
 
+// cloudinary
+const multer = require('multer');
+const { avatarStorage } = require('../config/cloudinary');
+const upload = multer({ storage: avatarStorage });
+
 // viewing profile
 router.get('/profile', isLoggedIn, async (req, res) => {
    const user = await User.findById(req.session.user._id);
@@ -20,7 +25,7 @@ router.get('/profile', isLoggedIn, async (req, res) => {
 // displaying edit profile form
 router.get('/profile/edit', isLoggedIn, async (req, res) => {
     const user = await User.findById(req.session.user._id);
-    res.render('users/editProfile');
+    res.render('users/editProfile', {user});
 });
 
 // updating profile details
@@ -30,6 +35,18 @@ router.put('/profile', isLoggedIn, async (req, res) => {
 
     await User.findByIdAndUpdate(req.session.user._id, updates);
     res.redirect('/users/profile');
+});
+
+// deleting a user
+router.delete('/:id', isLoggedIn, async (req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if(!user || user._id.toString() !== req.session.user._id) {
+        return res.redirect('/games/dashboard');
+    }
+
+    await User.findByIdAndDelete(req.params.id);
+    res.redirect('/auth/login');
 });
 
 // exporting the router

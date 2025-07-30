@@ -18,5 +18,14 @@ const storage = new CloudinaryStorage({
     }
 });
 
-// exporting the cloudinary instance
-module.exports = cloudinary;
+const avatarStorage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'stackd-avatars',
+        allowed_formats: ['jpg', 'jpeg', 'png'],
+        transformation: [{ width: 300, height: 300, crop: 'thumb', gravity: 'face' }]
+    }
+})
+
+// exporting the cloudinary and storage
+module.exports = {cloudinary, storage, avatarStorage};

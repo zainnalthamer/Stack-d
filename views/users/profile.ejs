@@ -10,8 +10,17 @@
 
     <h1>Profile</h1>
 
+    <% if (user.avatar) { %>
+        <img src="<%= user.avatar %>" alt="Avatar" style="max-width:120px; border-radius:50%;">
+    <% } else { %>
+        <img src="https://res.cloudinary.com/dvhwvkip4/image/upload/v1753900321/Default_xxvq7h.png">
+    <% } %>
+
     <p><strong>Username:</strong> <%= user.username %></p>
     <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Name:</strong> <%= user.name %></p>
+    <p><strong>Age:</strong> <%= user.age %></p>
+    <p><strong>Bio:</strong> <%= user.bio %></p>
 
     <button><a href="/users/profile/edit">Edit Profile</a></button>
 

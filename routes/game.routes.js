@@ -26,6 +26,13 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
+// displaying a form to create a new game
+router.get('/new', isLoggedIn, (req, res) => {
+    res.render('games/new');
+});
+
+
+
 // displaying a specific game
 router.get('/:id', isLoggedIn, async (req, res) => {
     const game = await Game.findById(req.params.id);
@@ -36,11 +43,6 @@ router.get('/:id', isLoggedIn, async (req, res) => {
 
     res.render('games/game-details', {game});
 })
-
-// displaying a form to create a new game
-router.get('/new', isLoggedIn, (req, res) => {
-    res.render('games/new');
-});
 
 // creating a new game
 router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
