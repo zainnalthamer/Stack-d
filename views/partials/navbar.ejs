@@ -1,0 +1,10 @@
+<nav>
+        <% if (user) { %>
+            <form action="/auth/logout" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        <% } else { %>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/sign-up">Sign Up</a></li>
+        <% } %>
+</nav>

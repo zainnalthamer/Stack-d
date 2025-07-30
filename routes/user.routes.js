@@ -5,5 +5,8 @@ const router = require('express').Router();
 const User = require('../models/User');
 const Game = require('../models/Game');
 
+// importing middleware
+const isLoggedIn = require('../middleware/isLoggedIn');
+
 // exporting the router
 module.exports = router;

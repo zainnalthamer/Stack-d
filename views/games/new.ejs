@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Game</title>
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <h1>Add a New Game</h1>
+
+    <form action="/games" method="post">
+        <label for="title">Title</label>
+        <input name="title" id="title" required>
+
+        <br><br>
+
+        <label for="platform">Platform</label>
+        <select name="platform" required>
+            <option disabled selected value="">Select Platform</option>
+            <option value="Playstation">Playstation</option>
+            <option value="Xbox">Xbox</option>
+            <option value="PC">PC</option>
+            <option value="Nintendo Switch">Nintendo Switch</option>
+            <option value="Mobile">Mobile</option>
+        </select>
+
+        <br><br>
+
+        <label for="status">Status</label>
+        <select name="status">
+            <option>Playing</option>
+            <option>Completed</option>
+            <option>Want to Play</option>
+            <option>Abandoned</option>
+        </select>
+    </form>
+</body>
+</html>

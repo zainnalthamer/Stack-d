@@ -6,6 +6,18 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Welcome Back, <%= user.username %></h1>
+    <%- include('../partials/navbar') %>
+    
+    <h1>Welcome back, <%= user.username %></h1>
+    <h2>Your Games</h2>
+
+    <ul>
+        <% games.forEach(game => { %>
+            <li>
+                <strong><%= game.title %></strong> — <%= game.platform %> | <%= game.status %>
+                <a href="/games/<%= game._id %>">View</a>
+            </li>
+        <% }) %>
+    </ul>
 </body>
 </html>
