@@ -2,6 +2,9 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
+// importing middleware
+const isLoggedIn = require('../middleware/isLoggedIn');
+
 // displaying the sign-up form
 router.get('/sign-up', (req, res) => {
     res.render('auth/sign-up');
@@ -111,6 +114,34 @@ router.get('/change-password', (req, res) => {
     }
 
     res.render('auth/change-password');
+});
+
+// handle password updates
+router.post('/change-password', isLoggedIn, async (req, res) => {
+    const {oldPassword, newPassword, confirmPassword} = req.body;
+
+    try {
+        if(newPassword !== confirmPassword) {
+            return res.render('auth/change-password', {error: 'Passwords do not match.'});
+        }
+
+        const user = await User.findById(req.session.user._id);
+        const validOldPassword = bcrypt.compareSync(oldPassword, user.password);
+
+        if(!validOldPassword) {
+            return res.render('auth/change-password', {error: 'Old password is incorrect.'});
+        }
+
+        const hashedNewPassword = bcrypt.hashSync(newPassword, 10);
+        user.password = hashedNewPassword;
+
+        await user.save();
+
+        res.render('auth/change-password', {error: 'An error occurred while changing the password.'});
+    } catch (error) {
+        console.error('Error changing password: ', error);
+        res.render('auth/change-password', {error: 'An error occurred while changing the password'});
+    }
 });
 
 module.exports = router;

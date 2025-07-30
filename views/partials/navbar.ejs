@@ -1,6 +1,7 @@
 <nav>
         <% if (user) { %>
-            <form action="/auth/logout" method="post">
+            <button><a href="/users/profile">Profile</a></button>
+            <form action="/auth/logout" method="post" style="display:inline;">
                 <button type="submit">Logout</button>
             </form>
         <% } else { %>
