@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Game</title>
+</head>
+<body>
+    <%- include('../partials/navbar') %>
+
+    <h1>Edit Game: <%= game.title %></h1>
+
+    <form action="/games/<%= game._id %>?_method=PUT" method="post" method="POST" enctype="multipart/form-data">
+        <label for="title">Title</label>
+        <input name="title" id="title" value="<%= game.title %>">
+
+        <br><br>
+
+        <label for="platform">Platform</label>
+        <select name="platform">
+            <option value="Playstation"
+                <% if( game.platform === 'Playstation') { %>
+                    selected
+                <% } %>
+            ></option>
+
+            <option value="Xbox"
+                <% if( game.platform === 'Xbox') { %>
+                    selected
+                <% } %>
+            ></option>    
+
+            <option value="PC"
+                <% if( game.platform === 'PC') { %>
+                    selected
+                <% } %>
+            ></option>
+
+            <option value="Nintendo Switch"
+                <% if( game.platform === 'Nintendo Switch') { %>
+                    selected
+                <% } %>
+            ></option>
+
+            <option value="Mobile"
+                <% if( game.platform === 'Mobile') { %>
+                    selected
+                <% } %>
+            ></option>
+        </select>
+
+        <br><br>
+
+        <label for="genre">Genre</label>
+        <input name="genre" id="genre" value="<%= game.genre %>" >
+
+        <br><br>
+
+        <label>Release Year:</label>
+    <input type="number" name="releaseYear" value="<%= game.releaseYear %>">
+
+    <label>Developer:</label>
+    <input name="developer" value="<%= game.developer %>">
+
+    <label for="status">Status</label>
+    <select name="status">
+            <option value="Want to Play"
+                <% if( game.status === 'Want to Play') { %>
+                    selected
+                <% } %>
+            ></option>
+
+            <option value="Playing"
+                <% if( game.status === 'Playing') { %>
+                    selected
+                <% } %>
+            ></option>    
+
+            <option value="Completed"
+                <% if( game.status === 'Completed') { %>
+                    selected
+                <% } %>
+            ></option>
+
+            <option value="Abandoned"
+                <% if( game.status === 'Abandoned') { %>
+                    selected
+                <% } %>
+            ></option>
+        </select>
+
+        <br><br>
+
+        <label for="rating">Rating (1-5)</label>
+        <input type="number" name="userRating" min="1" max="5" value="<%= game.userRating %>">
+
+        <br><br>
+
+        <label for="userReview">Review</label>
+        <textarea name="userReview"><%= game.userReview %></textarea>
+
+        <label for="notes">Notes</label>
+        <textarea name="notes"><%= game.notes %></textarea>
+
+        <label for="image">Replace Cover Image</label>
+        <input type="file" name="image" accept="image/*">
+
+        <br><br>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
