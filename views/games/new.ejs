@@ -10,7 +10,7 @@
 
     <h1>Add a New Game</h1>
 
-    <form action="/games" method="post">
+    <form action="/games" method="post" enctype="multipart/form-data">
         <label for="title">Title</label>
         <input name="title" id="title" required>
 
@@ -28,13 +28,51 @@
 
         <br><br>
 
-        <label for="status">Status</label>
+        <label>Genre:</label>
+        <input name="genre">
+
+        <br><br>
+
+        <label>Release Year:</label>
+        <input type="number" name="releaseYear" min="1980" max="2025">
+
+        <br><br>
+
+        <label>Developer:</label>
+        <input name="developer">
+
+        <br><br>
+
+        <label>Status:</label>
         <select name="status">
+            <option>Want to Play</option>
             <option>Playing</option>
             <option>Completed</option>
-            <option>Want to Play</option>
             <option>Abandoned</option>
         </select>
-    </form>
+
+        <br><br>
+
+        <label>Rating (1–5):</label>
+        <input type="number" name="userRating" min="1" max="5">
+
+        <br><br>
+
+        <label>Review:</label>
+        <textarea name="userReview"></textarea>
+
+        <br><br>
+
+        <label>Notes:</label>
+        <textarea name="notes"></textarea>
+
+        <br><br>
+
+        <label>Upload Image:</label>
+        <input type="file" name="image" accept="image/*">
+
+        <br><br>
+
+        <button type="submit">Create Game</button>
 </body>
 </html>
