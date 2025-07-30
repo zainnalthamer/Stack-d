@@ -22,31 +22,31 @@
                 <% if( game.platform === 'Playstation') { %>
                     selected
                 <% } %>
-            ></option>
+            >Playstation</option>
 
             <option value="Xbox"
                 <% if( game.platform === 'Xbox') { %>
                     selected
                 <% } %>
-            ></option>    
+            >Xbox</option>    
 
             <option value="PC"
                 <% if( game.platform === 'PC') { %>
                     selected
                 <% } %>
-            ></option>
+            >PC</option>
 
             <option value="Nintendo Switch"
                 <% if( game.platform === 'Nintendo Switch') { %>
                     selected
                 <% } %>
-            ></option>
+            >Nintendo Switch</option>
 
             <option value="Mobile"
                 <% if( game.platform === 'Mobile') { %>
                     selected
                 <% } %>
-            ></option>
+            >Mobile</option>
         </select>
 
         <br><br>
@@ -57,56 +57,65 @@
         <br><br>
 
         <label>Release Year:</label>
-    <input type="number" name="releaseYear" value="<%= game.releaseYear %>">
+        <input type="number" name="releaseYear" value="<%= game.releaseYear %>">
 
-    <label>Developer:</label>
-    <input name="developer" value="<%= game.developer %>">
+        <br><br>
+        
+        <label>Developer:</label>
+        <input name="developer" value="<%= game.developer %>">
 
-    <label for="status">Status</label>
-    <select name="status">
+        <br><br>
+
+        <label for="status">Status</label>
+        <select name="status">
             <option value="Want to Play"
                 <% if( game.status === 'Want to Play') { %>
                     selected
                 <% } %>
-            ></option>
+            >Want to Play</option>
 
             <option value="Playing"
                 <% if( game.status === 'Playing') { %>
                     selected
                 <% } %>
-            ></option>    
+            >Playing</option>    
 
             <option value="Completed"
                 <% if( game.status === 'Completed') { %>
                     selected
                 <% } %>
-            ></option>
+            >Completed</option>
 
             <option value="Abandoned"
                 <% if( game.status === 'Abandoned') { %>
                     selected
                 <% } %>
-            ></option>
-        </select>
+            >Abandoned</option>
+            </select>
 
-        <br><br>
+            <br><br>
 
-        <label for="rating">Rating (1-5)</label>
-        <input type="number" name="userRating" min="1" max="5" value="<%= game.userRating %>">
+            <label for="rating">Rating (1-5)</label>
+            <input type="number" name="userRating" min="1" max="5" value="<%= game.userRating %>">
 
-        <br><br>
+            <br><br>
 
-        <label for="userReview">Review</label>
-        <textarea name="userReview"><%= game.userReview %></textarea>
+            <label for="userReview">Review</label>
+            <textarea name="userReview"><%= game.userReview %></textarea>
 
-        <label for="notes">Notes</label>
-        <textarea name="notes"><%= game.notes %></textarea>
+            <br><br>
 
-        <label for="image">Replace Cover Image</label>
-        <input type="file" name="image" accept="image/*">
+            <label for="notes">Notes</label>
+            <textarea name="notes"><%= game.notes %></textarea>
 
-        <br><br>
-        <button type="submit">Save Changes</button>
-    </form>
+            <br><br>
+
+            <label for="image">Replace Cover Image</label>
+            <input type="file" name="image" accept="image/*">
+
+            <br><br>
+            
+            <button type="submit">Save Changes</button>
+        </form>
 </body>
 </html>
