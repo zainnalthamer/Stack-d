@@ -23,5 +23,14 @@ router.get('/profile/edit', isLoggedIn, async (req, res) => {
     res.render('users/editProfile');
 });
 
+// updating profile details
+router.put('/profile', isLoggedIn, async (req, res) => {
+    const {username, email} = req.body;
+    const updates = {username, email};
+
+    await User.findByIdAndUpdate(req.session.user._id, updates);
+    res.redirect('/users/profile');
+});
+
 // exporting the router
 module.exports = router;

@@ -104,4 +104,13 @@ router.post('/logout', (req, res) => {
     res.redirect('/auth/login');
 });
 
+// displaying a form for changing passwords
+router.get('/change-password', (req, res) => {
+    if(!req.session.user) {
+        return res.redirect('/auth/login');
+    }
+
+    res.render('auth/change-password');
+});
+
 module.exports = router;
