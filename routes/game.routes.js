@@ -82,5 +82,46 @@ router.get('/:id/edit', isLoggedIn, async (req, res) => {
     res.render('games/edit', {game});
 });
 
+// editing a game
+router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
+    const game = await Game.findById(req.params.id);
+
+    if(!game || game.user.toString() !== req.session.user._id) {
+        return res.redirect('/games/dashboard');
+    }
+
+    // update image if a new one is uploaded
+    if(req.file) {
+        game.image = req.file.path;
+    }
+
+    // update other fields
+    game.title = req.body.title;
+    game.platform = req.body.platform;
+    game.genre = req.body.genre;
+    game.releaseYear = req.body.releaseYear;
+    game.developer = req.body.developer;
+    game.status = req.body.status;
+    game.userRating = req.body.userRating;
+    game.userReview = req.body.userReview;
+    game.notes = req.body.notes;
+
+    await game.save();
+    
+    res.redirect(`/games/${game._id}`);
+});
+
+// deleting a game
+router.delete('/:id', isLoggedIn, async (req, res) => {
+    const game = await Game.findById(req.params.id);
+
+    if(!game || game.user.toString() !== req.session.user._id) {
+        return res.redirect('/games/dashboard');
+    }
+
+    await Game.findByIdAndDelete(req.params.id);
+    res.redirect('/games/dashboard');
+});
+
 // exporting the router
 module.exports = router;

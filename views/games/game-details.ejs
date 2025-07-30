@@ -21,8 +21,10 @@
     <p><strong>Review:</strong> <%= game.userReview %></p>
     <p><strong>Notes:</strong> <%= game.notes %></p>
 
-    <br>
+    <a href="/games/<%= game._id %>/edit">Edit</a>
 
-    <!-- <a href="/games/ game._id %>/edit">Edit</a> -->
+    <form action="/games/<%= game._id %>?_method=DELETE" method="post">
+        <button type="submit">Delete</button>
+    </form>
 </body>
 </html>
