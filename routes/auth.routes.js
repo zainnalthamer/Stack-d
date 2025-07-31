@@ -49,6 +49,24 @@ router.post('/sign-up', upload.single('avatar'), async (req, res) => {
             });
         }
 
+        if(!name || !age || !bio) {
+            return res.render('auth/sign-up', {
+                error: 'All fields are required.'
+            });
+        }
+
+        if(isNaN(age) || age < 6 || age > 99) {
+            return res.render('auth/sign-up', {
+                error: 'Age must be a number between 6 and 99.'
+            });
+        }
+
+        if(bio.length > 250) {
+            return res.render('auth/sign-up', {
+                error: 'Bio cannot be longer than 250 characters.'
+            });
+        }
+
         // hash password and create user
         const hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -86,6 +104,12 @@ router.get('/login', (req, res) => {
 // handling login logic
 router.post('/login', async (req, res) => {
     try {
+        if(!req.body.username || !req.body.password) {
+            return res.render('auth/login', {
+                error: 'All fields are required'
+            });
+        }
+
         const userInDatabase = await User.findOne({username:req.body.username});
 
         if(!userInDatabase) {
@@ -132,11 +156,25 @@ router.get('/change-password', (req, res) => {
 router.post('/change-password', isLoggedIn, async (req, res) => {
     const {oldPassword, newPassword, confirmPassword} = req.body;
 
-    try {
-        if(newPassword !== confirmPassword) {
-            return res.render('auth/change-password', {error: 'Passwords do not match.'});
-        }
+    if(!oldPassword || !newPassword || !confirmPassword) {
+        return res.render('auth/change-password', {
+            error: "All fields are required."
+        });
+    }
 
+    if (newPassword.length < 6) {
+        return res.render('auth/change-password', {
+            error: 'New password must be at least 6 characters long'
+        });
+    }
+
+    if (newPassword !== confirmPassword) {
+        return res.render('auth/change-password', {
+            error: 'Password do not much.'
+        });
+    }
+
+    try {
         const user = await User.findById(req.session.user._id);
         const validOldPassword = bcrypt.compareSync(oldPassword, user.password);
 

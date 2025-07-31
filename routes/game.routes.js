@@ -48,6 +48,20 @@ router.get('/:id', isLoggedIn, async (req, res) => {
 // creating a new game
 router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
     try {
+        const { title, platform, releaseYear, developer, status, userRating } = req.body;
+
+        if (!title || !platform || !genre || !releaseYear || !developer || !status) {
+            return res.render('games/new', {
+                error: 'Please fill in all require fields'
+            });
+        }
+
+        if (userRating && (isNan(userRating) || userRating < 0 || userRating > 10)) {
+            return res.render('games/new', {
+                error: 'Rating must be a number between 0 and 10.'
+            });
+        }
+
         let imageUrl = 'https://res.cloudinary.com/doctomog7/image/upload/v1753846568/Default_k5eybl.png';
         if (req.file) {
             imageUrl = req.file.path; 
@@ -88,6 +102,18 @@ router.get('/:id/edit', isLoggedIn, async (req, res) => {
 // editing a game
 router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
     const game = await Game.findById(req.params.id);
+
+    if(!title || !platform || !genre || !releaseYear || !developer || !status) {
+        return res.render('games/edit', {
+            error: 'Please fill in all required fields.', game
+        });
+    }
+
+    if(userRating && (isNan(userRating) || userRating < 0 || userRating > 10)) {
+        return res.render('games/edit', {
+            error: 'Rating must be a number between 0 and 10.', game
+        });
+    }
 
     if(!game || game.user.toString() !== req.session.user._id) {
         return res.redirect('/games/dashboard');
