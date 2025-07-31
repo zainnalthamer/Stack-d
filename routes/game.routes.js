@@ -48,7 +48,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
 // creating a new game
 router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
     try {
-        const { title, platform, releaseYear, developer, status, userRating } = req.body;
+        const { title, platform, genre, releaseYear, developer, status, userRating } = req.body;
 
         if (!title || !platform || !genre || !releaseYear || !developer || !status) {
             return res.render('games/new', {
@@ -56,7 +56,7 @@ router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
             });
         }
 
-        if (userRating && (isNan(userRating) || userRating < 0 || userRating > 10)) {
+        if (userRating && (isNaN(userRating) || userRating < 0 || userRating > 10)) {
             return res.render('games/new', {
                 error: 'Rating must be a number between 0 and 10.'
             });
@@ -101,6 +101,9 @@ router.get('/:id/edit', isLoggedIn, async (req, res) => {
 
 // editing a game
 router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
+
+    const { title, platform, genre, releaseYear, developer, status, userRating } = req.body;
+
     const game = await Game.findById(req.params.id);
 
     if(!title || !platform || !genre || !releaseYear || !developer || !status) {
@@ -109,7 +112,7 @@ router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
         });
     }
 
-    if(userRating && (isNan(userRating) || userRating < 0 || userRating > 10)) {
+    if(userRating && (isNaN(userRating) || userRating < 0 || userRating > 10)) {
         return res.render('games/edit', {
             error: 'Rating must be a number between 0 and 10.', game
         });
