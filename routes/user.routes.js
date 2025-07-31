@@ -29,9 +29,13 @@ router.get('/profile/edit', isLoggedIn, async (req, res) => {
 });
 
 // updating profile details
-router.put('/profile', isLoggedIn, async (req, res) => {
-    const {username, email} = req.body;
-    const updates = {username, email};
+router.put('/profile', isLoggedIn, upload.single('avatar'), async (req, res) => {
+    const {username, name, age, bio} = req.body;
+    const updates = {username, name, age, bio};
+
+    if(req.file) {
+        updates.avatar = req.file.path; // cloudinary url
+    }
 
     await User.findByIdAndUpdate(req.session.user._id, updates);
     res.redirect('/users/profile');

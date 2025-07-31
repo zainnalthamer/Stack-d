@@ -7,19 +7,39 @@
 </head>
 <body>
     <h1>Sign Up</h1>
-    <form action="/auth/sign-up" method="post">
+    <form action="/auth/sign-up" method="post" enctype="multipart/form-data">
+        <label for="name">Name</label>
+        <input name="name" id="name" type="text" required>
+
+        <br><br>
+        
+        <label for="age">Age</label>
+        <input name="age" id="age" type="number" min="6" required>
+
+        <br><br>
+
         <label for="username">Username</label>
-        <input name="username" id="username" type="text">
+        <input name="username" id="username" type="text" required>
 
         <br><br>
 
         <label for="email">Email</label>
-        <input name="email" id="email" type="text">
+        <input name="email" id="email" type="text" required>
 
         <br><br>
 
         <label for="password">Password</label>
-        <input name="password" id="password" type="password">
+        <input name="password" id="password" type="password" required>
+
+        <br><br>
+
+        <label for="avatar">Avatar</label>
+        <input name="avatar" id="avatar" type="file" accept="image/*">
+
+        <br><br>
+
+        <label for="bio">Bio</label>
+        <textarea name="bio" id="bio"></textarea>
 
         <br><br>
 

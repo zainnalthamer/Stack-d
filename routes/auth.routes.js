@@ -5,15 +5,20 @@ const User = require('../models/User');
 // importing middleware
 const isLoggedIn = require('../middleware/isLoggedIn');
 
+// cloudinary
+const multer = require('multer');
+const { avatarStorage } = require('../config/cloudinary'); 
+const upload = multer({ storage: avatarStorage });
+
 // displaying the sign-up form
 router.get('/sign-up', (req, res) => {
     res.render('auth/sign-up');
 });
 
 // sign up logic (creating a new user)
-router.post('/sign-up', async (req, res) => {
+router.post('/sign-up', upload.single('avatar'), async (req, res) => {
     try {
-        const {username, email, password} = req.body;
+        const {username, email, password, name, age, bio} = req.body;
 
         // validation
         // check if all necessary fields exist
@@ -50,7 +55,14 @@ router.post('/sign-up', async (req, res) => {
         const newUser = {
             username, 
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            name,
+            age,
+            bio
+        };
+
+        if (req.file) {
+            newUser.avatar = req.file.path;
         }
 
         await User.create(newUser);

@@ -10,12 +10,16 @@
 
     <h1>Edit Profile</h1>
 
-    <form action="/users/profile?_method=PUT" method="post">
+    <% if (user.avatar) { %>
+        <img src="<%= user.avatar %>" alt="Avatar" style="max-width:80px; border-radius:50%;">
+    <% } %>
+        
+    <br><br>
+
+    <form action="/users/profile?_method=PUT" method="post" enctype="multipart/form-data">
         <label for="avatar">Avatar</label>
         <input name="avatar" id="avatar" type="file" accept="image/*">
-        <% if (user.avatar) { %>
-            <img src="<%= user.avatar %>" alt="Avatar" style="max-width:80px; border-radius:50%;">
-        <% } %>
+
         <br><br>
 
         <label for="username">Username</label>
