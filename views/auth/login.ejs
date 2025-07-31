@@ -20,5 +20,9 @@
         
         <button type="submit">Login</button>
     </form>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
 </body>
 </html>

@@ -117,5 +117,9 @@
             
             <button type="submit">Save Changes</button>
         </form>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
 </body>
 </html>

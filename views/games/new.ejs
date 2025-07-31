@@ -74,5 +74,10 @@
         <br><br>
 
         <button type="submit">Create Game</button>
+        </form>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+        <p style="color:red;"><%= error %></p>
+        <% } %>
 </body>
 </html>

@@ -170,7 +170,7 @@ router.post('/change-password', isLoggedIn, async (req, res) => {
 
     if (newPassword !== confirmPassword) {
         return res.render('auth/change-password', {
-            error: 'Password do not much.'
+            error: 'Passwords do not match.'
         });
     }
 
