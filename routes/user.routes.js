@@ -31,6 +31,21 @@ router.get('/profile/edit', isLoggedIn, async (req, res) => {
 // updating profile details
 router.put('/profile', isLoggedIn, upload.single('avatar'), async (req, res) => {
     const {username, name, age, bio} = req.body;
+
+    if (!username || !name || !age) {
+        const user = await User.findById(req.session.user._id);
+        return res.render('users/editProfile', {
+            error: 'Username, name, and age are required.', user
+        });
+    }
+
+    if (isNaN(age) || age < 0) {
+        const user = await User.findById(req.session.user._id);
+        return res.render('users/editProfile', {
+            error: 'Age must be a valid number', user
+        });
+    }
+
     const updates = {username, name, age, bio};
 
     if(req.file) {
