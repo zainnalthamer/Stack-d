@@ -19,7 +19,8 @@ router.get('/dashboard', async (req, res) => {
 
     try {
         const games = await Game.find({user: req.session.user._id});
-        res.render('games/dashboard', {games, user:req.session.user});
+        const user = await User.findById(req.session.user._id);
+        res.render('games/dashboard', {games, user});
     } catch (error) {
         console.log('Error fetching games', error);
         res.redirect('/games');
