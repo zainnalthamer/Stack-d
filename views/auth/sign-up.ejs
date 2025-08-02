@@ -3,51 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Join STACKD</title>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form action="/auth/sign-up" method="post" enctype="multipart/form-data">
-        <label for="name">Name</label>
-        <input name="name" id="name" type="text" required>
+    <header>
+        <nav class="sign-navbar">
+            <div class="logo-no-text">
+                <img src="/images/logo.png" alt="STACKD Logo">
+            </div>
+            <div class="nav-links">
+                <a href="/auth/login">Login</a>
+                <a href="/auth/sign-up.ejs" class="active">Sign Up</a>
+            </div>
+        </nav>
+    </header>
 
-        <br><br>
-        
-        <label for="age">Age</label>
-        <input name="age" id="age" type="number" min="6" required>
+    <main>
+        <div class="signup-container">
+            <form action="/auth/sign-up" method="post" enctype="multipart/form-data">
+                <label for="avatarUpload" class="avatar-wrapper">
+                    <img id="avatarPreview" src="/images/logo-no-text.png" alt="Default Avatar">
+                    <input type="file" id="avatarUpload" name="avatar" accept="image/*" hidden>
+                </label>
 
-        <br><br>
+                <div class="input-row">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="number" name="age" placeholder="Age" min="6" required>
+                </div>
 
-        <label for="username">Username</label>
-        <input name="username" id="username" type="text" required>
+                <div class="input-row">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="text" name="email" placeholder="Email" required>
+                </div>
 
-        <br><br>
+                <input type="password" name="password" placeholder="Password" required>
 
-        <label for="email">Email</label>
-        <input name="email" id="email" type="text" required>
+                <textarea name="bio" placeholder="Tell us about yourself..."></textarea>
 
-        <br><br>
+                <button type="submit">Sign Up</button>
+                <p class="bottom-link">Already have an account? <a href="/auth/login">Login</a></p>
 
-        <label for="password">Password</label>
-        <input name="password" id="password" type="password" required>
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <p class="error"><%= error %></p>
+                <% } %>
+            </form>
+        </div>
+    </main>
 
-        <br><br>
-
-        <label for="avatar">Avatar</label>
-        <input name="avatar" id="avatar" type="file" accept="image/*">
-
-        <br><br>
-
-        <label for="bio">Bio</label>
-        <textarea name="bio" id="bio"></textarea>
-
-        <br><br>
-
-        <button type="submit">Sign Up</button>
-    </form>
-
-    <% if (typeof error !== 'undefined' && error) { %>
-        <p style="color:red;"><%= error %></p>
-    <% } %>
+    <script src="/js/signup.js"></script>
 </body>
 </html>
