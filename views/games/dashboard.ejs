@@ -4,23 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles/style.css" />
 </head>
 <body>
     <%- include('../partials/navbar') %>
+
+    <main class="dashboard">
+        <h1 class="welcome">Welcome back, <%= user.name %></h1>
+
+        <a href="/games/new" class="add-game-btn" title="Add New Game"><span>+</span></a>
+    </main>
     
     <h1>Welcome back, <%= user.name %></h1>
     <a href="/games/new"><button>Add a New Game</button></a>
 
+    <section class="game-section">
+        <h2>Your Games</h2>
+        <div class="game-row">
+            <% games.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                    <div class="game-title"><%= game.title %></div>
+                </a>
+            <% }) %>
+        </div>
+    </section>
 
-    <h2>Your Games</h2>
+    <section class="game-section">
+        <h2>Favorites</h2>
+        <div class="game-row">
+        </div>
+    </section>
+    
+    <section class="game-section">
+        <h2>Recently Played</h2>
+        <div class="game-row">
+        </div>
+    </section>
 
-    <ul>
-        <% games.forEach(game => { %>
-            <li>
-                <strong><%= game.title %></strong> — <%= game.platform %> | <%= game.status %>
-                <a href="/games/<%= game._id %>">View</a>
-            </li>
-        <% }) %>
-    </ul>
+    <section class="game-section">
+        <h2>Continue Playing</h2>
+        <div class="game-row">
+        </div>
+    </section>
 </body>
 </html>

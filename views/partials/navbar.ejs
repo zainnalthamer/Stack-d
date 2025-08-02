@@ -1,11 +1,19 @@
-<nav>
-        <% if (user) { %>
-            <button><a href="/users/profile">Profile</a></button>
-            <form action="/auth/logout" method="post" style="display:inline;">
-                <button type="submit">Logout</button>
-            </form>
-        <% } else { %>
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/auth/sign-up">Sign Up</a></li>
-        <% } %>
+<nav class="sign-navbar">
+  <div class="logo-no-text">
+    <a href="/">
+      <img src="/images/logo.png" alt="STACKD Logo">
+    </a>
+  </div>
+
+  <div class="nav-links">
+    <% if (user) { %>
+      <a href="/users/profile">Profile</a>
+      <form action="/auth/logout" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
+    <% } else { %>
+      <a href="/auth/login">Login</a>
+      <a href="/auth/sign-up" class="active">Sign Up</a>
+    <% } %>
+  </div>
 </nav>

@@ -4,25 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/auth/login" method="post">
-        <label for="username">Username</label>
-        <input name="username" id="username" type="text">
+    <header>
+        <%- include('../partials/navbar') %>
+    </header>
 
-        <br><br>
+    <main>
+        <div class="signup-container">
+            <div class="logo-center">
+                <img src="/images/logo.png" alt="STACKD Logo">
+            </div>
 
-        <label for="password">Password</label>
-        <input name="password" id="password" type="password">
+            <form action="/auth/login" method="post">
+                <input name="username" id="username" type="text" placeholder="Username" required>
+                <input name="password" id="password" type="password" placeholder="Password" required>
 
-        <br><br>
-        
-        <button type="submit">Login</button>
-    </form>
+                <button type="submit">Login</button>
 
-    <% if (typeof error !== 'undefined' && error) { %>
-        <p style="color:red;"><%= error %></p>
-    <% } %>
+                <p class="bottom-link">Don’t have an account? <a href="/auth/sign-up">Sign Up</a></p>
+
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <p class="error"><%= error %></p>
+                <% } %>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
