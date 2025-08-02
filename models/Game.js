@@ -32,7 +32,7 @@ const gameSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: '/images/default-game.jpg'
+        default: '/images/logo-no-text.jpg'
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

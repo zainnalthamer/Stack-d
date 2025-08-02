@@ -62,7 +62,7 @@ router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
             });
         }
 
-        let imageUrl = 'https://res.cloudinary.com/doctomog7/image/upload/v1753846568/Default_k5eybl.png';
+        let imageUrl = '/images/logo-no-text.png';
         if (req.file) {
             imageUrl = req.file.path; 
         }
