@@ -12,7 +12,7 @@
 
     <main>
         <div class="game-form-container">
-            <form action="/games/<%= game._id %>? method=PUT" method="post" enctype="multipart/form-data" class="game-form">
+            <form action="/games/<%= game._id %>?_method=PUT" method="post" enctype="multipart/form-data" class="game-form">
                 <label for="gameImageUpload" class="game-image-wrapper">
                     <img id="gameImagePreview" src="<%= game.image %>" alt="Game Image Preview">
                     <input type="file" id="gameImageUpload" name="image" accept="image/*" hidden>

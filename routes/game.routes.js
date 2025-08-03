@@ -12,19 +12,52 @@ const upload = multer({ storage });
 
 // ADDING ROUTES
 // displaying user dashboard (all games)
+// router.get('/dashboard', async (req, res) => {
+//     if(!req.session.user) {
+//         return res.redirect('/auth/login');
+//     }
+
+//     try {
+//         const games = await Game.find({user: req.session.user._id});
+//         const user = await User.findById(req.session.user._id);
+//         res.render('games/dashboard', {games, user});
+//     } catch (error) {
+//         console.log('Error fetching games', error);
+//         res.redirect('/games');
+//     }
+// });
+
 router.get('/dashboard', async (req, res) => {
     if(!req.session.user) {
         return res.redirect('/auth/login');
     }
 
     try {
-        const games = await Game.find({user: req.session.user._id});
+        const allGames = await Game.find({user: req.session.user._id});
         const user = await User.findById(req.session.user._id);
-        res.render('games/dashboard', {games, user});
+
+        const twoWeeksAgo = new Date();
+        twoWeeksAgo.setDate(twoWeeksAgo.getDate()-14);
+
+        const gameLibrary = allGames;
+        const favorites = allGames.filter(game => game.userRating === 5);
+        const recentlyPlayed = allGames.filter(game => game.status === 'Completed' && new Date(game.updatedAt) >= twoWeeksAgo);
+        const playing = allGames.filter(game => game.status === 'Playing');
+        const wantToPlay = allGames.filter(game => game.status === 'Want to Play');
+        const completed = allGames.filter(game => game.status === 'Completed');
+        const abandoned = allGames.filter(game => game.status === 'Abandoned');
+
+        res.render('games/dashboard', {
+            user, gameLibrary, favorites, recentlyPlayed, playing, wantToPlay, completed, abandoned
+        });
     } catch (error) {
         console.log('Error fetching games', error);
         res.redirect('/games');
     }
+});
+
+router.get('/', async (req, res) => {
+    res.redirect('/games/dashboard');
 });
 
 // displaying a form to create a new game

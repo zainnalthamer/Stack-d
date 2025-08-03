@@ -16,9 +16,9 @@
     </main>
 
     <section class="game-section">
-        <h2>Your Games</h2>
+        <h2>Game Library</h2>
         <div class="game-row">
-            <% games.forEach(game => { %>
+            <% gameLibrary.forEach(game => { %>
                 <a href="/games/<%= game._id %>" class="game-card">
                     <img src="<%= game.image %>" alt="<%= game.title %>">
                 </a>
@@ -26,22 +26,82 @@
         </div>
     </section>
 
+    <% if (favorites.length > 0) { %>
     <section class="game-section">
         <h2>Favorites</h2>
         <div class="game-row">
+            <% favorites.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                </a>
+            <% }) %>
         </div>
     </section>
+    <% } %>
 
+    <% if (recentlyPlayed.length > 0) { %>
     <section class="game-section">
         <h2>Recently Played</h2>
         <div class="game-row">
+            <% recentlyPlayed.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                </a>
+            <% }) %>
         </div>
     </section>
+    <% } %>
 
+    <% if (playing.length > 0) { %>
     <section class="game-section">
-        <h2>Continue Playing</h2>
+        <h2>Currently Playing</h2>
         <div class="game-row">
+            <% playing.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                </a>
+            <% }) %>
         </div>
     </section>
+    <% } %>
+
+    <% if (wantToPlay.length > 0) { %>
+    <section class="game-section">
+        <h2>Want to Play</h2>
+        <div class="game-row">
+            <% wantToPlay.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                </a>
+            <% }) %>
+        </div>
+    </section>
+    <% } %>
+
+    <% if (completed.length > 0) { %>
+    <section class="game-section">
+        <h2>Completed</h2>
+        <div class="game-row">
+            <% completed.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                </a>
+            <% }) %>
+        </div>
+    </section>
+    <% } %>
+
+    <% if (abandoned.length > 0) { %>
+    <section class="game-section">
+        <h2>Abandoned</h2>
+        <div class="game-row">
+            <% abandoned.forEach(game => { %>
+                <a href="/games/<%= game._id %>" class="game-card">
+                    <img src="<%= game.image %>" alt="<%= game.title %>">
+                </a>
+            <% }) %>
+        </div>
+    </section>
+    <% } %>
 </body>
 </html>

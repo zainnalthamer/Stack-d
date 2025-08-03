@@ -495,11 +495,31 @@ button:hover {
   align-items: center;
   gap: 1.2rem;
   color: #e4e4e4;
+  text-align: center; /* Add this to center text content */
 }
 
 .profile-form p {
   font-size: 1rem;
   width: 100%;
+  text-align: center; /* Center the text in paragraphs */
+}
+
+.profile-form input, .profile-form textarea {
+  width: 100%;
+  max-width: 400px; /* Limit width and center inputs */
+}
+
+.profile-form .game-submit-btn {
+  width: 100%;
+  max-width: 400px; /* Match input width */
+}
+
+.profile-form .game-label {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #f30101;
+  text-decoration: none;
 }
 
 .avatar-wrapper {
@@ -533,4 +553,23 @@ button:hover {
 .profile-actions a, .profile-actions button {
   flex: 1;
   text-align: center;
+}
+
+/* Navbar */
+.nav-link-button {
+  background: none;
+  border: none;
+  color: #e4e4e4;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.nav-link-button:hover {
+  color: #f30101;
 }

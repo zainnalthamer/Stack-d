@@ -7,9 +7,10 @@
 
   <div class="nav-links">
     <% if (user) { %>
+      <a href="/games/dashboard">Dashboard</a>
       <a href="/users/profile">Profile</a>
       <form action="/auth/logout" method="post" style="display:inline;">
-        <button type="submit">Logout</button>
+        <button type="submit" class="nav-link-button">Logout</button>
       </form>
     <% } else { %>
       <a href="/auth/login">Login</a>
