@@ -4,122 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Game</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/js/gameForm.js" defer></script>
 </head>
 <body>
     <%- include('../partials/navbar') %>
 
-    <h1>Edit Game: <%= game.title %></h1>
+    <main>
+        <div class="game-form-container">
+            <form action="/games/<%= game._id %>? method=PUT" method="post" enctype="multipart/form-data" class="game-form">
+                <label for="gameImageUpload" class="game-image-wrapper">
+                    <img id="gameImagePreview" src="<%= game.image %>" alt="Game Image Preview">
+                    <input type="file" id="gameImageUpload" name="image" accept="image/*" hidden>
+                </label>
 
-    <form action="/games/<%= game._id %>?_method=PUT" method="post" method="POST" enctype="multipart/form-data">
-        <label for="title">Title</label>
-        <input name="title" id="title" value="<%= game.title %>">
+                <input type="text" name="title" placeholder="Title" class="game-input" value="<%= game.title %>" required>
 
-        <br><br>
+                <div class="game-input-row">
+                    <select name="platform" class="game-input" required>
+                        <option disabled selected value="">Platform</option>
+                        <option value="Playstation" <% if (game.platform === 'Playstation') { %> selected <% } %>>Playstation</option>
+                        <option value="Xbox" <% if (game.platform === 'Xbox') { %> selected <% } %>>Xbox</option>
+                        <option value="PC" <% if (game.platform === 'PC') { %> selected <% } %>>PC</option>
+                        <option value="Nintendo Switch" <% if (game.platform === 'Nintendo Switch') { %> selected <% } %>>Nintendo Switch</option>
+                        <option value="Mobile" <% if (game.platform === 'Mobile') { %> selected <% } %>>Mobile</option>
+                    </select>
 
-        <label for="platform">Platform</label>
-        <select name="platform">
-            <option value="Playstation"
-                <% if( game.platform === 'Playstation') { %>
-                    selected
+                    <input type="text" name="genre" placeholder="Genre" class="game-input" value="<%= game.genre %>">
+                </div>
+
+                <div class="game-input-row">
+                    <input type="number" name="releaseYear" min="1980" max="2025" placeholder="Release Year" class="game-input" value="<%= game.releaseYear %>">
+                    <input type="text" name="developer" placeholder="Developer" class="game-input" value="<%= game.developer %>">
+                </div>
+
+                <div class="game-input-row">
+                    <select name="status" class="game-input">
+                        <option disabled selected value="">Status</option>
+                        <option value="Want to Play" <% if (game.status === 'Want to Play') { %> selected <% } %>>Want to Play</option>
+                        <option value="Playing" <% if (game.status === 'Playing') { %> selected <% } %>>Playing</option>
+                        <option value="Completed" <% if (game.status === 'Completed') { %> selected <% } %>>Completed</option>
+                        <option value="Abandoned" <% if (game.status === 'Abandoned') { %> selected <% } %>>Abandoned</option>
+                    </select>
+
+                    <input type="number" name="userRating" min="1" max="5" placeholder="Rating (1–5)" class="game-input" value="<%= game.userRating %>">
+                </div>
+
+                <textarea name="userReview" placeholder="Write your review..." class="game-textarea"><%= game.userReview %></textarea>
+                <textarea name="notes" placeholder="Addiitonal notes..." class="game-textarea"><%= game.notes %></textarea>
+
+                <button type="submit" class="game-submit-btn">Save Changes</button>
+
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <p class="game-form-error"><%= error %></p>
                 <% } %>
-            >Playstation</option>
-
-            <option value="Xbox"
-                <% if( game.platform === 'Xbox') { %>
-                    selected
-                <% } %>
-            >Xbox</option>    
-
-            <option value="PC"
-                <% if( game.platform === 'PC') { %>
-                    selected
-                <% } %>
-            >PC</option>
-
-            <option value="Nintendo Switch"
-                <% if( game.platform === 'Nintendo Switch') { %>
-                    selected
-                <% } %>
-            >Nintendo Switch</option>
-
-            <option value="Mobile"
-                <% if( game.platform === 'Mobile') { %>
-                    selected
-                <% } %>
-            >Mobile</option>
-        </select>
-
-        <br><br>
-
-        <label for="genre">Genre</label>
-        <input name="genre" id="genre" value="<%= game.genre %>" >
-
-        <br><br>
-
-        <label>Release Year:</label>
-        <input type="number" name="releaseYear" value="<%= game.releaseYear %>">
-
-        <br><br>
-        
-        <label>Developer:</label>
-        <input name="developer" value="<%= game.developer %>">
-
-        <br><br>
-
-        <label for="status">Status</label>
-        <select name="status">
-            <option value="Want to Play"
-                <% if( game.status === 'Want to Play') { %>
-                    selected
-                <% } %>
-            >Want to Play</option>
-
-            <option value="Playing"
-                <% if( game.status === 'Playing') { %>
-                    selected
-                <% } %>
-            >Playing</option>    
-
-            <option value="Completed"
-                <% if( game.status === 'Completed') { %>
-                    selected
-                <% } %>
-            >Completed</option>
-
-            <option value="Abandoned"
-                <% if( game.status === 'Abandoned') { %>
-                    selected
-                <% } %>
-            >Abandoned</option>
-            </select>
-
-            <br><br>
-
-            <label for="rating">Rating (1-5)</label>
-            <input type="number" name="userRating" min="1" max="5" value="<%= game.userRating %>">
-
-            <br><br>
-
-            <label for="userReview">Review</label>
-            <textarea name="userReview"><%= game.userReview %></textarea>
-
-            <br><br>
-
-            <label for="notes">Notes</label>
-            <textarea name="notes"><%= game.notes %></textarea>
-
-            <br><br>
-
-            <label for="image">Replace Cover Image</label>
-            <input type="file" name="image" accept="image/*">
-
-            <br><br>
-            
-            <button type="submit">Save Changes</button>
-        </form>
-
-        <% if (typeof error !== 'undefined' && error) { %>
-        <p style="color:red;"><%= error %></p>
-    <% } %>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
