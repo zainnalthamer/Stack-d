@@ -4,80 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a New Game</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/js/gameForm.js" defer></script>
 </head>
 <body>
     <%- include('../partials/navbar') %>
 
-    <h1>Add a New Game</h1>
+    <main>
+        <div class="game-form-container">
+            <form action="/games" method="post" enctype="multipart/form-data" class="game-form">
+                <label for="gameImageUpload" class="game-image-wrapper">
+                    <img id="gameImagePreview" src="/images/logo-no-text.png" alt="Game Image Preview">
+                    <input type="file" id="gameImageUpload" name="image" accept="image/*" hidden>
+                </label>
 
-    <form action="/games" method="post" enctype="multipart/form-data">
-        <label for="title">Title</label>
-        <input name="title" id="title" required>
+                <input type="text" name="title" placeholder="Title" class="game-input" required>
 
-        <br><br>
+                <div class="game-input-row">
+                    <select name="platform" class="game-input" required>
+                        <option disabled selected value="">Platform</option>
+                        <option value="Playstation">Playstation</option>
+                        <option value="Xbox">Xbox</option>
+                        <option value="PC">PC</option>
+                        <option value="Nintendo Switch">Nintendo Switch</option>
+                        <option value="Mobile">Mobile</option>
+                    </select>
 
-        <label for="platform">Platform</label>
-        <select name="platform" required>
-            <option disabled selected value="">Select Platform</option>
-            <option value="Playstation">Playstation</option>
-            <option value="Xbox">Xbox</option>
-            <option value="PC">PC</option>
-            <option value="Nintendo Switch">Nintendo Switch</option>
-            <option value="Mobile">Mobile</option>
-        </select>
+                    <input type="text" name="genre" placeholder="Genre" class="game-input">
+                </div>
 
-        <br><br>
+                <div class="game-input-row">
+                    <input type="number" name="releaseYear" min="1980" max="2025" placeholder="Release Year" class="game-input">
+                    <input type="text" name="developer" placeholder="Developer" class="game-input">
+                </div>
 
-        <label>Genre:</label>
-        <input name="genre">
+                <div class="game-input-row">
+                    <select name="status" class="game-input">
+                        <option disabled selected value="">Status</option>
+                        <option>Want to Play</option>
+                        <option>Playing</option>
+                        <option>Completed</option>
+                        <option>Abandoned</option>
+                    </select>
 
-        <br><br>
+                    <input type="number" name="userRating" min="1" max="5" placeholder="Rating (1–5)" class="game-input">
+                </div>
 
-        <label>Release Year:</label>
-        <input type="number" name="releaseYear" min="1980" max="2025">
+                <textarea name="userReview" placeholder="Write your review..." class="game-textarea"></textarea>
+                <textarea name="notes" placeholder="Addiitonal notes..." class="game-textarea"></textarea>
 
-        <br><br>
+                <button type="submit" class="game-submit-btn">Add Game</button>
 
-        <label>Developer:</label>
-        <input name="developer">
-
-        <br><br>
-
-        <label>Status:</label>
-        <select name="status">
-            <option>Want to Play</option>
-            <option>Playing</option>
-            <option>Completed</option>
-            <option>Abandoned</option>
-        </select>
-
-        <br><br>
-
-        <label>Rating (1–5):</label>
-        <input type="number" name="userRating" min="1" max="5">
-
-        <br><br>
-
-        <label>Review:</label>
-        <textarea name="userReview"></textarea>
-
-        <br><br>
-
-        <label>Notes:</label>
-        <textarea name="notes"></textarea>
-
-        <br><br>
-
-        <label>Upload Image:</label>
-        <input type="file" name="image" accept="image/*">
-
-        <br><br>
-
-        <button type="submit">Create Game</button>
-        </form>
-
-        <% if (typeof error !== 'undefined' && error) { %>
-        <p style="color:red;"><%= error %></p>
-        <% } %>
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <p class="game-form-error"><%= error %></p>
+                <% } %>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
