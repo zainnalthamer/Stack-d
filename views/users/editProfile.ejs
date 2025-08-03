@@ -1,55 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile | STACKD</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <script src="/js/avatarPreview.js" defer></script>
 </head>
 <body>
-    <%- include('../partials/navbar') %>
+  <%- include('../partials/navbar') %>
 
-    <h1>Edit Profile</h1>
+  <main>
+    <div class="profile-container">
+      <form action="/users/profile?_method=PUT" method="post" enctype="multipart/form-data" class="profile-form">
+        <h2 class="game-form-title">Edit Profile</h2>
 
-    <% if (user.avatar) { %>
-        <img src="<%= user.avatar %>" alt="Avatar" style="max-width:80px; border-radius:50%;">
-    <% } %>
-        
-    <br><br>
+        <label for="avatarUpload" class="avatar-wrapper">
+          <img
+            id="avatarPreview"
+            src="<%= user.avatar ? user.avatar : 'https://res.cloudinary.com/dvhwvkip4/image/upload/v1753900321/Default_xxvq7h.png' %>"
+            alt="User Avatar"
+          />
+          <input type="file" id="avatarUpload" name="avatar" accept="image/*" hidden />
+        </label>
 
-    <form action="/users/profile?_method=PUT" method="post" enctype="multipart/form-data">
-        <label for="avatar">Avatar</label>
-        <input name="avatar" id="avatar" type="file" accept="image/*">
+        <input name="username" id="username" placeholder="Username" value="<%= user.username %>" class="game-input" required />
+        <input name="name" id="name" placeholder="Name" value="<%= user.name %>" class="game-input" />
+        <input name="age" id="age" type="number" min="6" placeholder="Age" value="<%= user.age %>" class="game-input" />
+        <textarea name="bio" id="bio" placeholder="Tell us about yourself..." class="game-textarea"><%= user.bio %></textarea>
 
-        <br><br>
+        <button type="submit" class="game-submit-btn">Save Changes</button>
 
-        <label for="username">Username</label>
-        <input name="username" id="username" value="<%= user.username %>">
+        <a href="/auth/change-password" class="game-label" style="text-align:center;">Change Password</a>
 
-        <br><br>
-
-        <label for="name">Name</label>
-        <input name="name" id="name" value="<%= user.name %>">
-
-        <br><br>
-
-        <label for="age">Age</label>
-        <input name="age" id="age" type="number" min="6" value="<%= user.age %>">
-
-        <br><br>
-
-        <label for="bio">Bio</label>
-        <textarea name="bio" id="bio"><%= user.bio %></textarea>
-
-        <br><br>
-
-        <button type="submit">Save Changes</button>
-        <br><br>
-
-        <a href="/auth/change-password">Change Password</a>
-    </form>
-
-    <% if (typeof error !== 'undefined' && error) { %>
-        <p style="color:red;"><%= error %></p>
-    <% } %>
+        <% if (typeof error !== 'undefined' && error) { %>
+          <p class="game-form-error"><%= error %></p>
+        <% } %>
+      </form>
+    </div>
+  </main>
 </body>
 </html>
