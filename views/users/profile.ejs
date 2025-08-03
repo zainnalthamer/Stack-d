@@ -20,11 +20,10 @@
                     <% } %>
                 </label>
 
-                <p><strong>Username:</strong> <%= user.username %></p>
-                <p><strong>Email:</strong> <%= user.email %></p>
-                <p><strong>Name:</strong> <%= user.name %></p>
-                <p><strong>Age:</strong> <%= user.age %></p>
-                <p><strong>Bio:</strong> <%= user.bio %></p>
+                <h2><%= user.name %></h2>
+                <p>@<%= user.username %></p>
+                <p><%= user.email %></p>
+                <p><%= user.bio %></p>
 
                 <div class="profile-actions">
                     <a href="/users/profile/edit" class="game-submit-btn">Edit Profile</a>
