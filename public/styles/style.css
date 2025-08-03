@@ -13,6 +13,7 @@ body {
   min-height: 100vh;
 }
 
+/* Sign Up Page */
 .sign-navbar {
   display: flex;
   justify-content: space-between;
@@ -155,6 +156,7 @@ button:hover {
   margin-top: 0.5rem;
 }
 
+/* Dashboard Page */
 .logo-center {
     display: flex;
     justify-content: center;
@@ -270,6 +272,7 @@ button:hover {
   background-color: #1a1a1f;
 }
 
+/* Create a New Game Page */
 .game-form-container {
   background-color: #1a1a1f;
   padding: 2.5rem;
@@ -375,4 +378,159 @@ button:hover {
 
 .game-image-wrapper:hover img {
   transform: scale(1.05);
+}
+
+/* Game Details Page */
+.details-container {
+  /* max-width: 1200px; */
+  width: 50%;
+  margin: 2rem auto;
+  background-color: #1a1a1f;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.cover-img {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.cover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  object-position: center top;
+  filter: blur(1px);
+}
+
+.cover-img h1 {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+  right: 2rem;
+  color: #fff;
+  font-size: 1.9;
+  text-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  margin: 0;
+  max-width: 60%;
+}
+
+.details-content {
+  padding: 2rem;
+  color: #e4e4e4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+}
+
+.details-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.details-content strong {
+  color: #ffffff;
+}
+
+.details-content p.full-width {
+  grid-column: 1 / -1;
+}
+
+.details-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.details-actions a, .details-actions button {
+  flex: 1;
+  background-color: #f30101;
+  color: white;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.details-actions a:hover, .details-actions button:hover {
+  background-color: #cc0101;
+}
+
+.details-actions form {
+  flex: 1;
+  display: flex;
+}
+
+.details-actions form button {
+  width: 100%;
+  max-width: none;
+}
+
+/* Profile Page */
+.profile-container {
+  background-color: #1a1a1f;
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  margin: 2rem auto;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  color: #e4e4e4;
+}
+
+.profile-form p {
+  font-size: 1rem;
+  width: 100%;
+}
+
+.avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.avatar-wrapper img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #f30101;
+  transition: transform 0.3s ease;
+  background-color: #232327;
+}
+
+.avatar-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.profile-actions a, .profile-actions button {
+  flex: 1;
+  text-align: center;
 }

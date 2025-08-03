@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Details</title>
+    <title><%= game.title %></title>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
     <%- include('../partials/navbar') %>
 
-    <h1><%= game.title %></h1>
+    <div class="details-container">
+        <div class="cover-img">
+            <img src="<%= game.image %>" alt="Game Cover Image">
+            <h1><%=game.title%></h1>
+        </div>
 
-    <img src="<%= game.image %>" alt="Game Image" style="max-width: 300px;">
+        <div class="details-content">
+            <p><strong>Status:</strong> <%= game.status %></p>
+            <p><strong>Genre:</strong> <%= game.genre %></p>
+            <p><strong>Platform:</strong> <%= game.platform %></p>
+            <p><strong>Developer:</strong> <%= game.developer %></p>
+            <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
+            <p><strong>Rating:</strong> <%= game.userRating %>/5</p>
 
-    <p><strong>Status:</strong> <%= game.status %></p>
-    <p><strong>Genre:</strong> <%= game.genre %></p>
-    <p><strong>Platform:</strong> <%= game.platform %></p>
-    <p><strong>Developer:</strong> <%= game.developer %></p>
-    <p><strong>Release Year:</strong> <%= game.releaseYear %></p>
-    <p><strong>Rating:</strong> <%= game.userRating %>/5</p>
-    <p><strong>Review:</strong> <%= game.userReview %></p>
-    <p><strong>Notes:</strong> <%= game.notes %></p>
+            <p class="full-width"><strong>Review:</strong> <%= game.userReview %></p>
+            <p class="full-width"><strong>Notes:</strong> <%= game.notes %></p>
 
-    <button><a href="/games/<%= game._id %>/edit">Edit</a></button>
-
-    <br><br>
-    <form action="/games/<%= game._id %>?_method=DELETE" method="post">
-        <button type="submit">Delete</button>
-    </form>
+            <div class="details-actions">
+                <a href="/games/<%=game._id%>/edit">Edit</a>
+                <form action="/games/<%=game._id%>?_method=DELETE" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -4,28 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
     <%- include('../partials/navbar') %>
 
-    <h1>Profile</h1>
+    <main>
+        <div class="profile-container">
+            <form action="/users/<%= user._id %>?_method=PUT" method="post" enctype="multipart/form-data" class="profile-form">
+                <label for="avatar" class="avatar-wrapper">
+                    <% if (user.avatar) { %>
+                        <img id="avatarPreview" src="<%= user.avatar %>" alt="User Avatar">
+                    <% } else { %>
+                        <img id="avatarPreview" src="/images/logo-no-text2" alt="Default Avatar">
+                    <% } %>
+                </label>
 
-    <% if (user.avatar) { %>
-        <img src="<%= user.avatar %>" alt="Avatar" style="max-width:120px; border-radius:50%;">
-    <% } else { %>
-        <img src="https://res.cloudinary.com/dvhwvkip4/image/upload/v1753900321/Default_xxvq7h.png">
-    <% } %>
+                <p><strong>Username:</strong> <%= user.username %></p>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Name:</strong> <%= user.name %></p>
+                <p><strong>Age:</strong> <%= user.age %></p>
+                <p><strong>Bio:</strong> <%= user.bio %></p>
 
-    <p><strong>Username:</strong> <%= user.username %></p>
-    <p><strong>Email:</strong> <%= user.email %></p>
-    <p><strong>Name:</strong> <%= user.name %></p>
-    <p><strong>Age:</strong> <%= user.age %></p>
-    <p><strong>Bio:</strong> <%= user.bio %></p>
+                <div class="profile-actions">
+                    <a href="/users/profile/edit" class="game-submit-btn">Edit Profile</a>
 
-    <button><a href="/users/profile/edit">Edit Profile</a></button>
-
-    <form action="/users/<%= user._id %>?_method=DELETE" method="post" style="display: inline;">
-        <button type="submit">Delete</button>
-    </form>
+                    <form action="/users/<%= user._id %>?_method=DELETE" method="post">
+                        <button type="submit" class="game-submit-btn" style="background-color: #555;">Delete</button>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
