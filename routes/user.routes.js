@@ -78,11 +78,15 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
 
         // destroy session
         req.session.destroy((error) => {
-            console.log('Error destroying session');
-        })
-        res.redirect('/auth/login');
+            if (error) {
+                console.log('Error destroying session:', error);
+                return res.redirect('/games/dashboard');
+            }
+            res.redirect('/auth/login');
+        });
     } catch (error) {
-        console.log("Deleting error", error)
+        console.log("Deleting error", error);
+        res.redirect('/games/dashboard');
     }
 });
 
