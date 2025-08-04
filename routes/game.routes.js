@@ -126,13 +126,13 @@ router.put('/:id', isLoggedIn, upload.single('image'), async (req, res) => {
 
     if(!title) {
         return res.render('games/edit', {
-            error: 'Title is required.', game
+            error: 'Title is required.', game, currentPage: 'dashboard'
         });
     }
 
     if(userRating && (isNaN(userRating) || userRating < 1 || userRating > 5)) {
         return res.render('games/edit', {
-            error: 'Rating must be a number between 1 and 5.', game
+            error: 'Rating must be a number between 1 and 5.', game, currentPage: 'dashboard'
         });
     }
 

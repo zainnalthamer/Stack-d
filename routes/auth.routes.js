@@ -155,7 +155,7 @@ router.post('/logout', (req, res) => {
 });
 
 // displaying a form for changing passwords
-router.get('/change-password', (req, res) => {
+router.get('/change-password', isLoggedIn, (req, res) => {
     if(!req.session.user) {
         return res.redirect('/auth/login');
     }
