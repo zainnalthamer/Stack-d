@@ -2,8 +2,6 @@
 
 <img src="https://res.cloudinary.com/dvhwvkip4/image/upload/v1754312720/stackd-logo_yyachi.png" alt="Stack'd Logo" width="300">
 
-Your personal video game tracker, for everything you're playing, finished, or planning to start.
-
 ## Background
 This website was created as my second project for the Software Engineering Immersive course at General Assembly.
 I wanted to build this website because as a gamer and a developer, I constantly found myself forgetting which games I wanted to play next or which ones I had already completed. Inspired by apps like **TV Time** and **Letterboxd**, I built **Stackd**, which is a modernbacklog tracker specifically for video games.
