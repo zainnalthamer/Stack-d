@@ -62,7 +62,9 @@ router.put('/profile', isLoggedIn, upload.single('avatar'), async (req, res) => 
 
 // deleting a user
 router.delete('/:id', isLoggedIn, async (req, res) => {
-    const user = await User.findById(req.params.id);
+    
+    try {
+        const user = await User.findById(req.params.id);
 
     if(!user || user._id.toString() !== req.session.user._id) {
         return res.redirect('/games/dashboard');
@@ -70,6 +72,9 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
 
     await User.findByIdAndDelete(req.params.id);
     res.redirect('/auth/login');
+    } catch (error) {
+        console.log("Deleting error", error)
+    }
 });
 
 // exporting the router
