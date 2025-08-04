@@ -11,12 +11,12 @@
 
     <main>
         <div class="profile-container">
-            <form action="/users/<%= user._id %>?_method=PUT" method="post" enctype="multipart/form-data" class="profile-form">
+            <div class="profile-form">
                 <label for="avatar" class="avatar-wrapper">
                     <% if (user.avatar) { %>
                         <img id="avatarPreview" src="<%= user.avatar %>" alt="User Avatar">
                     <% } else { %>
-                        <img id="avatarPreview" src="/images/logo-no-text2" alt="Default Avatar">
+                        <img id="avatarPreview" src="/images/logo-no-text2.png" alt="Default Avatar">
                     <% } %>
                 </label>
 
@@ -32,7 +32,7 @@
                         <button type="submit" class="game-submit-btn" style="background-color: #555;">Delete</button>
                     </form>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
 </body>
