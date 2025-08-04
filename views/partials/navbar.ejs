@@ -7,14 +7,14 @@
 
   <div class="nav-links">
     <% if (user) { %>
-      <a href="/games/dashboard">Dashboard</a>
-      <a href="/users/profile">Profile</a>
+      <a href="/games/dashboard" <% if (currentPage === 'dashboard') { %>class="active"<% } %>>Dashboard</a>
+      <a href="/users/profile" <% if (currentPage === 'profile') { %>class="active"<% } %>>Profile</a>
       <form action="/auth/logout" method="post" style="display:inline;">
         <button type="submit" class="nav-link-button">Logout</button>
       </form>
     <% } else { %>
-      <a href="/auth/login">Login</a>
-      <a href="/auth/sign-up" class="active">Sign Up</a>
+      <a href="/auth/login" <% if (currentPage === 'login') { %>class="active"<% } %>>Login</a>
+      <a href="/auth/sign-up" <% if (currentPage === 'signup') { %>class="active"<% } %>>Sign Up</a>
     <% } %>
   </div>
 </nav>

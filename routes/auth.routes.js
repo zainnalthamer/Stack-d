@@ -12,7 +12,7 @@ const upload = multer({ storage: avatarStorage });
 
 // displaying the sign-up form
 router.get('/sign-up', (req, res) => {
-    res.render('auth/sign-up');
+    res.render('auth/sign-up', { currentPage: 'signup'});
 });
 
 // sign up logic (creating a new user)
@@ -24,20 +24,23 @@ router.post('/sign-up', upload.single('avatar'), async (req, res) => {
         // check if all necessary fields exist
         if(!username || !email || !password) {
             return res.render('auth/sign-up', {
-                error: "All fields are required."
+                error: "All fields are required.",
+                currentPage: 'signup'
             });
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!emailRegex.test(email)) {
             return res.render('auth/sign-up', {
-                error: 'Please enter a valid email address.'
+                error: 'Please enter a valid email address.',
+                currentPage: 'signup'
             });
         }
 
         if(password.length < 6) {
             return res.render("auth/sign-up", {
-                error: "Password must be at least 6 characters long."
+                error: "Password must be at least 6 characters long.",
+                currentPage: 'signup'
             });
         }
 
@@ -45,25 +48,29 @@ router.post('/sign-up', upload.single('avatar'), async (req, res) => {
         const existingUser = await User.findOne({username});
         if(existingUser) {
             return res.render('auth/sign-up', {
-                error: 'Username is already taken.'
+                error: 'Username is already taken.',
+                currentPage: 'signup'
             });
         }
 
         if(!name || !age || !bio) {
             return res.render('auth/sign-up', {
-                error: 'All fields are required.'
+                error: 'All fields are required.',
+                currentPage: 'signup'
             });
         }
 
         if(isNaN(age) || age < 6 || age > 99) {
             return res.render('auth/sign-up', {
-                error: 'Age must be a number between 6 and 99.'
+                error: 'Age must be a number between 6 and 99.',
+                currentPage: 'signup'
             });
         }
 
         if(bio.length > 250) {
             return res.render('auth/sign-up', {
-                error: 'Bio cannot be longer than 250 characters.'
+                error: 'Bio cannot be longer than 250 characters.',
+                currentPage: 'signup'
             });
         }
 
@@ -89,7 +96,8 @@ router.post('/sign-up', upload.single('avatar'), async (req, res) => {
     } catch (error) {
         console.log('Error signing up:', error);
         res.render("auth/sign-up", {
-            error: "Something went wrong. Please try again."
+            error: "Something went wrong. Please try again.",
+            currentPage: 'signup'
         });
     }
 });
@@ -97,7 +105,7 @@ router.post('/sign-up', upload.single('avatar'), async (req, res) => {
 // displaying the login form
 router.get('/login', (req, res) => {
     res.render('auth/login', {
-        error: null
+        currentPage: 'login'
     }); 
 });
 
@@ -106,14 +114,17 @@ router.post('/login', async (req, res) => {
     try {
         if(!req.body.username || !req.body.password) {
             return res.render('auth/login', {
-                error: 'All fields are required'
+                error: 'All fields are required',
+                currentPage: 'login'
             });
         }
 
         const userInDatabase = await User.findOne({username:req.body.username});
 
         if(!userInDatabase) {
-            return res.render('auth/login', {error: "Username not found."});
+            return res.render('auth/login', {error: "Username not found.",
+                currentPage: 'login'
+            });
         }
 
         const validPassword = bcrypt.compareSync(
@@ -122,7 +133,7 @@ router.post('/login', async (req, res) => {
         );
 
         if(!validPassword) {
-            return res.render('auth/login', {error: "Incorrect password"});
+            return res.render('auth/login', {error: "Incorrect password", currentPage: 'login'});
         }
 
         req.session.user = {
@@ -133,7 +144,7 @@ router.post('/login', async (req, res) => {
         res.redirect('/games/dashboard');
     } catch (error) {
         console.error("Error during sign-in: ", error);
-        res.render('auth/login', {error: "An unexpected error occurred."});
+        res.render('auth/login', {error: "An unexpected error occurred.", currentPage: 'login'});
     }
 });
 

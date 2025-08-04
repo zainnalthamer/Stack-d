@@ -19,13 +19,13 @@ const upload = multer({ storage: avatarStorage });
 // viewing profile
 router.get('/profile', isLoggedIn, async (req, res) => {
    const user = await User.findById(req.session.user._id);
-   res.render('users/profile', {user}); 
+   res.render('users/profile', {user, currentPage: 'profile'}); 
 });
 
 // displaying edit profile form
 router.get('/profile/edit', isLoggedIn, async (req, res) => {
     const user = await User.findById(req.session.user._id);
-    res.render('users/editProfile', {user});
+    res.render('users/editProfile', {user, currentPage: 'profile'});
 });
 
 // updating profile details
@@ -35,14 +35,18 @@ router.put('/profile', isLoggedIn, upload.single('avatar'), async (req, res) => 
     if (!username || !name || !age) {
         const user = await User.findById(req.session.user._id);
         return res.render('users/editProfile', {
-            error: 'Username, name, and age are required.', user
+            error: 'Username, name, and age are required.', 
+            user,
+            currentPage: 'profile'
         });
     }
 
     if (isNaN(age) || age < 0) {
         const user = await User.findById(req.session.user._id);
         return res.render('users/editProfile', {
-            error: 'Age must be a valid number', user
+            error: 'Age must be a valid number', 
+            user,
+            currentPage: 'profile'
         });
     }
 

@@ -48,7 +48,7 @@ router.get('/dashboard', async (req, res) => {
         const abandoned = allGames.filter(game => game.status === 'Abandoned');
 
         res.render('games/dashboard', {
-            user, gameLibrary, favorites, recentlyPlayed, playing, wantToPlay, completed, abandoned
+            user, gameLibrary, favorites, recentlyPlayed, playing, wantToPlay, completed, abandoned, currentPage: 'dashboard'
         });
     } catch (error) {
         console.log('Error fetching games', error);
@@ -62,10 +62,8 @@ router.get('/', async (req, res) => {
 
 // displaying a form to create a new game
 router.get('/new', isLoggedIn, (req, res) => {
-    res.render('games/new');
+    res.render('games/new', {currentPage: 'dashboard'});
 });
-
-
 
 // displaying a specific game
 router.get('/:id', isLoggedIn, async (req, res) => {
@@ -126,13 +124,15 @@ router.post('/', isLoggedIn, upload.single('image'), async (req, res) => {
 
         if (!title) {
             return res.render('games/new', {
-                error: 'Title is required'
+                error: 'Title is required',
+                currentPage: 'dashboard'
             });
         }
 
         if (userRating && (isNaN(userRating) || userRating < 1 || userRating > 5)) {
             return res.render('games/new', {
-                error: 'Rating must be a number between 1 and 5.'
+                error: 'Rating must be a number between 1 and 5.',
+                currentPage: 'dashboard'
             });
         }
 
@@ -170,7 +170,7 @@ router.get('/:id/edit', isLoggedIn, async (req, res) => {
         return res.redirect('/games/dashboard');
     }
 
-    res.render('games/edit', {game});
+    res.render('games/edit', {game, currentPage: 'dashboard'});
 });
 
 // editing a game
