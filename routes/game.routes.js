@@ -58,7 +58,7 @@ router.get('/:id', isLoggedIn, async (req, res) => {
         return res.redirect('/games/dashboard');
     }
 
-    res.render('games/game-details', {game});
+    res.render('games/game-details', {game, currentPage: 'dashboard'});
 })
 
 // creating a new game
