@@ -34,6 +34,16 @@ app.use(express.json());
 connectToDB();
 
 // routes
+
+// root
+app.get('/', (req, res) => {
+    if (req.session.user) {
+        res.redirect('/games/dashboard');
+    } else {
+        res.redirect('/auth/login');
+    }
+})
+
 const userRoutes = require('./routes/user.routes');
 const gameRoutes = require('./routes/game.routes');
 const authRoutes = require('./routes/auth.routes');
