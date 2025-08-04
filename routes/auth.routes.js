@@ -160,7 +160,7 @@ router.get('/change-password', (req, res) => {
         return res.redirect('/auth/login');
     }
 
-    res.render('auth/change-password');
+    res.render('auth/change-password', {currentPage: 'profile'});
 });
 
 // handle password updates
@@ -169,19 +169,22 @@ router.post('/change-password', isLoggedIn, async (req, res) => {
 
     if(!oldPassword || !newPassword || !confirmPassword) {
         return res.render('auth/change-password', {
-            error: "All fields are required."
+            error: "All fields are required.",
+            currentPage: 'profile'
         });
     }
 
     if (newPassword.length < 6) {
         return res.render('auth/change-password', {
-            error: 'New password must be at least 6 characters long'
+            error: 'New password must be at least 6 characters long',
+            currentPage: 'profile'
         });
     }
 
     if (newPassword !== confirmPassword) {
         return res.render('auth/change-password', {
-            error: 'Passwords do not match.'
+            error: 'Passwords do not match.',
+            currentPage: 'profile'
         });
     }
 
@@ -190,7 +193,7 @@ router.post('/change-password', isLoggedIn, async (req, res) => {
         const validOldPassword = bcrypt.compareSync(oldPassword, user.password);
 
         if(!validOldPassword) {
-            return res.render('auth/change-password', {error: 'Old password is incorrect.'});
+            return res.render('auth/change-password', {error: 'Old password is incorrect.', currentPage: 'profile'});
         }
 
         const hashedNewPassword = bcrypt.hashSync(newPassword, 10);
@@ -201,7 +204,7 @@ router.post('/change-password', isLoggedIn, async (req, res) => {
         res.redirect('/users/profile');
     } catch (error) {
         console.error('Error changing password: ', error);
-        res.render('auth/change-password', {error: 'An error occurred while changing the password'});
+        res.render('auth/change-password', {error: 'An error occurred while changing the password', currentPage: 'profile'});
     }
 });
 
