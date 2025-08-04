@@ -66,12 +66,21 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
 
-    if(!user || user._id.toString() !== req.session.user._id) {
-        return res.redirect('/games/dashboard');
-    }
+        if(!user || user._id.toString() !== req.session.user._id) {
+            return res.redirect('/games/dashboard');
+        }
 
-    await User.findByIdAndDelete(req.params.id);
-    res.redirect('/auth/login');
+        // delete all games associated with the user
+        await Game.deleteMany({user:req.params.id});
+
+        // delete user
+        await User.findByIdAndDelete(req.params.id);
+
+        // destroy session
+        req.session.destroy((error) => {
+            console.log('Error destroying session');
+        })
+        res.redirect('/auth/login');
     } catch (error) {
         console.log("Deleting error", error)
     }
