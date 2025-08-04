@@ -2,8 +2,6 @@
 
 <img src="https://res.cloudinary.com/dvhwvkip4/image/upload/v1754312720/stackd-logo_yyachi.png" alt="Stack'd Logo" width="300">
 
-
-## Track Stack Dominate
 Your personal video game tracker, for everything you're playing, finished, or planning to start.
 
 ## Background
