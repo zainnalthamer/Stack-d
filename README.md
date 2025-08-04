@@ -4,7 +4,7 @@
 
 ## Background
 This website was created as my second project for the Software Engineering Immersive course at General Assembly.
-I wanted to build this website because as a gamer and a developer, I constantly found myself forgetting which games I wanted to play next or which ones I had already completed. Inspired by apps like **TV Time** and **Letterboxd**, I built **Stackd**, which is a modernbacklog tracker specifically for video games.
+I wanted to build this website because as a gamer and a developer, I constantly found myself forgetting which games I wanted to play next or which ones I had already completed. Inspired by apps like **TV Time** and **Letterboxd**, I built **Stackd**, which is a modern backlog tracker specifically for video games.
 At the same time, I wanted to level up my full-stack development skills, while practicing real-world implementations like:
 - Secure user authentication.
 - Data validation.
